@@ -1,21 +1,21 @@
-package MovieSearch2;
+package DailyBoxOffice;
 
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-public class MovieSearchTableModel extends AbstractTableModel {
+public class BoxOfficeTableModel extends AbstractTableModel {
 
-	private ArrayList<MovieSearchTO> datas;
+	private ArrayList<BoxOfficeTO> datas;
 	
-	private String[] columnNames = new String[] { "영화제목", "장르", "감독", "개봉날짜", "국가" };
+	private String[] columnNames = new String[] { "영화명", "개봉일자", "해당일 관객수", "누적 관객수", "증감율" };
 	private boolean[] columnEditables = new boolean[] { false, false, false, false, false };
 	
-	public MovieSearchTableModel(String searchMovieNm) {
+	public BoxOfficeTableModel() {
 		// TODO Auto-generated constructor stub
 		
-		MovieSearchDAO dao = new MovieSearchDAO();
-		datas = dao.parseXML(searchMovieNm);
+		BoxOfficeDAO dao = new BoxOfficeDAO();
+		datas = dao.parseXML();
 	}
 	
 	@Override
@@ -45,24 +45,24 @@ public class MovieSearchTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
-		MovieSearchTO to = datas.get( rowIndex );
+		BoxOfficeTO to = datas.get( rowIndex );
 		
 		String result = "";
 		switch(columnIndex) {
 		case 0:
-			result = to.getMovieNm();
+			result = to.getRnum() + " " + to.getMovieNm();
 			break;
 		case 1:
-			result = to.getGenreAlt();
-			break;
-		case 2:
-			result = to.getDirector();
-			break;
-		case 3:
 			result = to.getOpenDt();
 			break;
+		case 2:
+			result = to.getAudiCnt();
+			break;
+		case 3:
+			result = to.getAudiAcc();
+			break;
 		case 4:
-			result = to.getNationAlt();
+			result = to.getRankInten();
 			break;
 		}
 		return result;

@@ -12,12 +12,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class MovieSearchReaderUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -48,11 +52,13 @@ public class MovieSearchReaderUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btn = new JButton("데이터 읽어오기");
+		JButton btn = new JButton("검색");
 		btn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				table.setModel( new MovieSearchTableModel() );
+//				System.out.println(textField.getText());
+				String searchMovieNm = textField.getText();
+				table.setModel( new MovieSearchTableModel(searchMovieNm) );
 				table.getColumnModel().getColumn(0).setResizable(false);
 				table.getColumnModel().getColumn(0).setPreferredWidth(279);
 				table.getColumnModel().getColumn(1).setResizable(false);
@@ -62,11 +68,11 @@ public class MovieSearchReaderUI extends JFrame {
 				table.getColumnModel().getColumn(4).setResizable(false);
 			}
 		});
-		btn.setBounds(12, 10, 760, 23);
+		btn.setBounds(639, 54, 133, 23);
 		contentPane.add(btn);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 43, 760, 508);
+		scrollPane.setBounds(12, 100, 760, 451);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -95,5 +101,15 @@ public class MovieSearchReaderUI extends JFrame {
 		table.getColumnModel().getColumn(3).setResizable(false);
 		table.getColumnModel().getColumn(4).setResizable(false);
 		scrollPane.setViewportView(table);
+		
+		textField = new JTextField();
+		textField.setBounds(12, 55, 615, 21);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("영화 검색");
+		lblNewLabel.setFont(new Font("나눔고딕", Font.BOLD, 17));
+		lblNewLabel.setBounds(329, 25, 112, 20);
+		contentPane.add(lblNewLabel);
 	}
 }

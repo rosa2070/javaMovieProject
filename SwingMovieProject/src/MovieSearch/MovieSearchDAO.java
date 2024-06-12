@@ -41,9 +41,9 @@ public class MovieSearchDAO {
 		return sbData;
 	}
 	
-	public ArrayList<MovieSearchTO> parseXML() {
+	public ArrayList<MovieSearchTO> parseXML(String movieNm) {
 		
-		StringBuilder sbData = this.readData( "https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml?key=f5eef3421c602c6cb7ea224104795888&movieNm=원더랜드" );
+		StringBuilder sbData = this.readData( "https://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml?key=f5eef3421c602c6cb7ea224104795888&movieNm=" + movieNm);
 		
 		ArrayList<MovieSearchTO> datas = new ArrayList<MovieSearchTO>();
 		
@@ -69,7 +69,7 @@ public class MovieSearchDAO {
 		            to.setDirector(directorName);
 				}
 			} else {
-				System.out.println("감독 정보 없음");
+//				System.out.println("감독 정보 없음");
 			}
 		
 			datas.add( to );

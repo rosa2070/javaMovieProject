@@ -9,7 +9,7 @@ public class MovieRecordTableModel extends AbstractTableModel {
 
 	private ArrayList<MovieRecordDTO> datas;
 	
-	private String[] columnNames = new String[] { "영화 제목", "코멘트", "평점", "본 날짜"};
+	private String[] columnNames = new String[] { "영화 제목", "본 날짜", "평점", "코멘트"};
 	private boolean[] columnEditables = new boolean[] { false, false, false, false };
 
 	

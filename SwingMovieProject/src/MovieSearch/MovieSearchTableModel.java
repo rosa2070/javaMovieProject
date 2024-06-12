@@ -11,27 +11,11 @@ public class MovieSearchTableModel extends AbstractTableModel {
 	private String[] columnNames = new String[] { "영화제목", "장르", "감독", "개봉날짜", "국가" };
 	private boolean[] columnEditables = new boolean[] { false, false, false, false, false };
 	
-	public MovieSearchTableModel() {
+	public MovieSearchTableModel(String searchMovieNm) {
 		// TODO Auto-generated constructor stub
 		
-		/*
-		BoxOfficeTO to = new BoxOfficeTO();
-		to.setRnum( "1" );
-		to.setRank( "1" );
-		to.setRankInten( "0" );
-		to.setRankOldAndNew( "OLD" );
-		to.setMovieCd( "20236653" );
-		to.setMovieNm( "퓨리오사: 매드맥스 사가" );
-		to.setOpenDt( "2024-05-22" );
-		to.setAudiCnt( "28378" );
-		to.setAudiAcc( "1079407" );
-		
-		datas = new ArrayList<BoxOfficeTO>();
-		datas.add( to );
-		*/
-		
 		MovieSearchDAO dao = new MovieSearchDAO();
-		datas = dao.parseXML();
+		datas = dao.parseXML(searchMovieNm);
 	}
 	
 	@Override

@@ -86,7 +86,6 @@ public class MovieRecordDAO {
 				to.setRate(rs.getString("rate"));
 				to.setComm(rs.getString("comm"));
 				movieRecords.add(to);
-				
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -98,24 +97,29 @@ public class MovieRecordDAO {
 		}
 		
 		return movieRecords;
-				
-				
-				
+							
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void updateRecords(String title, String date, String rate, String comm) {
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "update movie_record set date = ?, rate = ?, comm = ? where title = ?";
+			pstmt = this.conn.prepareStatement(sql);
+			pstmt.setString(1, date);
+			pstmt.setString(2, rate);
+			pstmt.setString(3, comm);
+			pstmt.setString(4, title);
+			
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  finally {
+			if( pstmt != null ) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null ) try { conn.close(); } catch( SQLException e ) {}			
+		}
+	}
+		
 	
 }
